@@ -240,7 +240,7 @@ struct SwiftPlayground {
             print("Room Volume : \(roomVolume)m³")
             print("Furnitures:")
             furnitureNames.forEach { name in
-print ("\(name) : \(furnitureVolumes.forEach)")
+print ("\(name) : \(furnitureVolumes.forEach { furniture in })")
             }
             lastMenue = false
         }

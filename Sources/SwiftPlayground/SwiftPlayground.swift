@@ -120,6 +120,7 @@ struct SwiftPlayground {
 
 // If the input is 5, exits the program
                 if option == 5 {
+                    print ("Thank you for using our tracker !!!")
                     isRunning = false
                 }
 

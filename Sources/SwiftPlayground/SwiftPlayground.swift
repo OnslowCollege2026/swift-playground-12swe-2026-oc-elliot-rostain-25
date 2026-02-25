@@ -9,7 +9,8 @@ func eggMenue() {
     print("2. Sell eggs")
     print("3. Show current stock")
     print("4. Show total eggs sold")
-    print("5. Exit")
+    print("5. Reset egg shop")
+    print("6. Exit")
     print("Choose an option:")
 
 }
@@ -84,7 +85,7 @@ struct SwiftPlayground {
         let minimum = 0
 
 // Sets the maximum number the user can input for the main menu
-        let maximum = 6
+        let maximum = 7
 
 // Creates a variable that will control when the while loop is active.
         var isRunning = true
@@ -118,9 +119,16 @@ struct SwiftPlayground {
                     print(" Total eggs sold :\(totalEggsSold) eggs")
                 }
 
-// If the input is 5, exits the program
+// If the input is 5, resets the values
                 if option == 5 {
-                    print ("Thank you for using our tracker !!!")
+                    currentEggStock = 0
+                    totalEggsSold = 0
+                    print("Egg shop has been reset")
+                }
+
+// If the input is 6, exits the program
+                if option == 6 {
+                    print ("Thank you for using our egg tracker !!!")
                     isRunning = false
                 }
 

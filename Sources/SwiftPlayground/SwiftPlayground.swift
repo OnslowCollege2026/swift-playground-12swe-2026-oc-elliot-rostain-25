@@ -1,250 +1,138 @@
 // The Swift Programming Language
 // https://docs.swift.org/swift-book
 
+/// Creates a function that will print the egg shop menue.
+func eggMenue() {
+    print("")
+    print("==== Egg Shop ====")
+    print("1. Add eggs")
+    print("2. Sell eggs")
+    print("3. Show current stock")
+    print("4. Show total eggs sold")
+    print("5. Reset egg shop")
+    print("6. Exit")
+    print("Choose an option:")
+
+}
+
+/// Creates a function that caclulates the number of egg to add/
+func addEggs(to currentStock: Int) -> Int {
+
+// Sets the minimum number of eggs you can add
+    let minimumEggs = 0
+
+// Sets the maximum number of eggs you can add.
+    let maximumEggs = 1001
+
+// Asks the user for input and adds requirments.
+    print("How many Eggs do you want to add?")
+    if let eggInput = readLine(), let eggNumber = Int(eggInput), eggNumber > minimumEggs,
+        eggNumber < maximumEggs
+    {
+        // Adds the user input number to the egg Stock.
+        print("Added \(eggNumber) eggs to stock")
+        return currentStock + eggNumber
+
+    } else {
+
+        // If the input doesnt meet the requirments, restarts the function.
+        print("Enter a valid number of eggs (between 1-1000)")
+        return addEggs()
+    }
+
+}
+
+/// Creates a function that will calculate and store the number of eggs to be sold.
+func sellEggs(to: currentStock ) {
+    let minimumSold = 0
+
+
+// Asks the user for input to sell eggs and sets requirments.
+    print("Enter how many eggs you want to sell:")
+    if let sellInput = readLine(), let sellNumber = Int(sellInput), sellNumber > minimumSold,
+        sellNumber < currentStock
+    {
+
+        // Substrack the number of eggs from the egg stock.
+        // Adds the number of eggs to the total eggs sold.
+        print("Sold \(sellNumber) eggs")
+        currentEggStock = currentEggStock - sellNumber
+        totalEggsSold = totalEggsSold + sellNumber
+
+    } else {
+
+        // If the input doesnt meet the requirments, sends a message and restarts the function.
+        print("Enter a valid number of eggs (under the total in stock)")
+        return sellEggs()
+    }
+}
+
 @main
 struct SwiftPlayground {
     static func main() {
-        print("Hello, world!")
+        
+        //  Creates a variable that will store the egg stock.
+        var currentEggStock = 0
 
-        // sets the while loop ready for the code to run.
-        var menueRunning = true
+        // Creates a variable that will store the number of egg sold.
+        var totalEggsSold = 0
 
-        // sets the while loop ready for later
-        var menueRunning2 = true
+// Sets the minimum number the user can input for the main menu
+        let minimum = 0
 
-        // sets the while loop ready for later
-        var menueRunning3 = true
+// Sets the maximum number the user can input for the main menu
+        let maximum = 7
 
-        // sets the while loop ready for later
-        var furnitureMenue = false
+// Creates a variable that will control when the while loop is active.
+        var isRunning = true
 
-        // sets the loop ready for later
-        var lastMenue = false
+// Creates a while loop to keep showing the menu until the user exits it.
+        while isRunning == true {
 
-        // makes so that we we will be able to use this variable outside the while loops
-        var roomLength = 0.0
+            // Runs the eggMenu function
+            eggMenue()
 
-        // makes so that we we will be able to use this variable outside the while loops
-        var roomWidth = 0.0
+// Ask the user for input so it can send him to the rigth place he cose on the menu.
+            if let input = readLine(), let option = Int(input), option < maximum, option > minimum {
 
-        // makes so that we we will be able to use this variable outside the while loops
-        var roomHeight = 0.0
-
-        // sets the minium value the user can enter for the measurements (0.1).
-        let minimumValue = 0.0
-
-        // sets the maximum volume of a furniture
-        let maximumVolume = 2.0
-
-        // creates a while loop for the code to work until the user enters a valid value.
-        while menueRunning == true {
-
-            // ask the user for input and sets the requirments for the code to work.
-            print("Enter room length:")
-            if let input = readLine(), let length = Double(input), length > minimumValue {
-                menueRunning = false
-                print("The length of the room has been set to \(length)m")
-
-                // makes so the width can be used outside the while loop.
-                roomLength = roomLength + length
-
-                // if the requirements are not met, the system informs the user, and repeats.
-            } else {
-                print("Enter a valid number")
-            }
-        }
-
-        // creates another while loop that works until the user enters a valid value
-        while menueRunning2 == true {
-
-            // ask the user for input and sets the requirments for the code to work.
-            print("Enter room width:")
-            if let input = readLine(), let width = Double(input), width > minimumValue {
-                menueRunning2 = false
-                print("The width of the room has been set to \(width)m")
-
-                // makes so the width can be used outside the while loop.
-                roomWidth = roomWidth + width
-
-                // if the requirements are not met, the system informs the user, and repeats.
-            } else {
-                print("Enter a valid number")
-            }
-        }
-
-        // creates another while loop that works until the user enters a valid value
-        while menueRunning3 == true {
-
-            // ask the user for input and sets the requirments for the code to work.
-            print("Enter room height:")
-            if let input = readLine(), let height = Double(input), height > minimumValue {
-                menueRunning3 = false
-                print("The height of the room has been set to \(height)m")
-
-                // makes so the width can be used outside the while loop.
-                roomHeight = roomWidth + height
-
-                // if the requirements are not met, the system informs the user, and repeats.
-            } else {
-                print("Enter a valid number")
-            }
-        }
-
-        // calculates the area of the room and prints it.
-        let roomArea = roomLength * roomWidth
-        print("The area of the room is \(roomArea)m²")
-
-        // calculates the volume of the room and prints it.
-        let roomVolume = roomLength * roomWidth * roomHeight
-        print("The volume of the room is \(roomVolume)m³")
-
-        // sets the array for the volume of the furnitures.
-        var furnitureVolumes: [Double] = []
-        var furnitureNames: [String] = []
-
-        // sets the different dialogue options
-        print("Do you want to add furnitures Yes/No")
-        if let userInput = readLine() {
-            if userInput == "Yes" {
-                furnitureMenue = true
-            } else if userInput == "yes" {
-                furnitureMenue = true
-            } else if userInput == "YES" {
-                furnitureMenue = true
-            } else if userInput == "No" {
-                lastMenue = true
-            } else if userInput == "no" {
-                lastMenue = true
-            } else if userInput == "NO" {
-                lastMenue = true
-            }
-
-        }
-        // creates the while loop in wich we add the users furnitures
-        while furnitureMenue == true {
-
-            // asks the user the name of the furniture and adds it to the list
-            print("Enter the name of your furniture:")
-            if let userInput = readLine() {
-                furnitureNames.append(userInput)
-            }
-
-            // asks the user for the dimensions of the furniture
-            print("Enter the dimensions of your furniture (in meters)")
-            print("Enter the Length of your furniture:")
-
-            // asks the user for the length of the furniture
-            if let userInput = readLine(), let length = Double(userInput), length > minimumValue {
-                print("Enter the Width of your furniture:")
-
-                // asks the user for the width of the furniture
-                if let userInput = readLine(), let width = Double(userInput), width > minimumValue {
-                    print("Enter the height of your furniture:")
-
-                    // asks the user for the height of the furniture
-                    if let userInput = readLine(), let height = Double(userInput),
-                        height > minimumValue
-                    {
-
-                        // calculates the total volume of the furniture and adds it to the list
-                        let furnitureVolume = height * width * length
-                        if furnitureVolume < maximumVolume {
-                            print ("Item added")
-                            furnitureVolumes.append(furnitureVolume)
-
-                            // asks the user if he wants to add a new furniture
-                            print("Do you want to add another furniture?")
-                            if let userInput = readLine() {
-                                if userInput == "No" {
-                                    furnitureMenue = false
-                                        lastMenue = true
-                                }
-                                if userInput == "NO" {
-                                    furnitureMenue = false
-                                        lastMenue = true
-                                }
-                                if userInput == "no" {
-                                    furnitureMenue = false
-                                        lastMenue = true
-                                }
-                            } 
-                        } else {
-                            print(
-                                "Oversized Item detected, press A if you want to continue, Q if you want to cancel"
-                            )
-                            if let userInput = readLine() {
-                                if userInput == "A" {
-                                    print ("Item added")
-                                    furnitureVolumes.append(furnitureVolume)
-
-                                    // asks the user if he wants to add a new furniture
-                                    print("Do you want to add another furniture?")
-                                    if let userInput = readLine() {
-                                        if userInput == "No" {
-                                            furnitureMenue = false
-                                        lastMenue = true
-                                        }
-                                        if userInput == "NO" {
-                                            furnitureMenue = false
-                                        lastMenue = true
-                                        }
-                                        if userInput == "no" {
-                                            furnitureMenue = false
-                                        lastMenue = true
-                                        }
-                                    } 
-                                }
-                                if userInput == "a" {
-                                    print ("Item added")
-                                    furnitureVolumes.append(furnitureVolume)
-
-                                    // asks the user if he wants to add a new furniture
-                                    print("Do you want to add another furniture?")
-                                    if let userInput = readLine() {
-                                        if userInput == "No" {
-                                            furnitureMenue = false
-                                        lastMenue = true
-                                        }
-                                        if userInput == "NO" {
-                                            furnitureMenue = false
-                                        lastMenue = true
-                                        }
-                                        if userInput == "no" {
-                                            furnitureMenue = false
-                                        lastMenue = true
-                                        }
-                                    } 
-                                }
-                            }
-                        }
-
-                        // if the requirements are not met, the system informs the user, and repeats
-                    } else {
-                        print("Enter a valid number")
-                    }
-
-                    // if the requirements are not met, the system informs the user, and repeats.
-                } else {
-                    print("Enter a valid number")
+// If the input is 1, runs the add Eggs function
+                if option == 1 {
+                    let newStock = addEggs(to: currentEggStock)
+                    currentEggStock = newStock
                 }
 
-                // if the requirements are not met, the system informs the user, and repeats.
+// If the Input is 2, runs the sell eggs fuction
+                if option == 2 {
+                    let eggSold = sellEggs(to : currentStock)
+                }
+
+// If the input is 3, shows the user the Egg Stock
+                if option == 3 {
+                    print("Current egg stock : \(currentEggStock) eggs")
+                }
+
+                // If the input is 4, shows the user the total egg sold.
+                if option == 4 {
+                    print(" Total eggs sold :\(totalEggsSold) eggs")
+                }
+
+// If the input is 5, resets the values
+                if option == 5 {
+                    currentEggStock = 0
+                    totalEggsSold = 0
+                    print("Egg shop has been reset")
+                }
+
+// If the input is 6, exits the program
+                if option == 6 {
+                    print ("Thank you for using our egg tracker !!!")
+                    isRunning = false
+                }
+
+                // If the input doesnt meet the requirments, restarts the program and shows an error message.
             } else {
                 print("Enter a valid number")
             }
         }
-
-        while lastMenue == true {
-            print("|     RECAP     |")
-            print("Room Area : \(roomArea)m²")
-            print("Room Volume : \(roomVolume)m³")
-            print("Furnitures:")
-            furnitureNames.forEach { name in
-print ("\(name) : \(furnitureVolumes)")
-print(furnitureVolumes)
-            }
-            lastMenue = false
-        }
-
     }
 }

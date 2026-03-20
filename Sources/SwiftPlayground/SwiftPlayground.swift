@@ -14,7 +14,7 @@ struct SwiftPlayground {
             ["~", "~", "~", "~", "~", "~"],
         ]
 
-        var answers = [
+        let answers = [
             ["~", "~", "S", "~", "~", "~"],
             ["~", "S", "~", "~", "~", "S"],
             ["S", "~", "~", "~", "~", "S"],
@@ -24,17 +24,17 @@ struct SwiftPlayground {
         ]
 
         
-let fromRow: [Int] = [0, 1, 0, 5, 5, 5, 5, 1, 2]
-let fromCol: [Int] = [2, 1, 2, 1, 2, 3, 4, 6, 6]
+// let fromRow: [Int] = [0, 1, 0, 5, 5, 5, 5, 1, 2]
+// let fromCol: [Int] = [2, 1, 2, 1, 2, 3, 4, 6, 6]
 
-// Generate new random position
-let toRow: Int = Int.random(in: 0..<answers.count)
-let toCol: Int = Int.random(in: 0..<answers[0].count)
+// // Generate new random position
+// let toRow: Int = Int.random(in: 0..<answers.count)
+// let toCol: Int = Int.random(in: 0..<answers[0].count)
 
-//Swap the letters
-let randoShip: Int = answers[fromRow][fromCol]
-answers[fromRow][fromCol] = answers[toRow][toCol]
-answers[toRow][toCol] = randoShip
+// //Swap the letters
+// let randoShip: Int = answers[fromRow][fromCol]
+// answers[fromRow][fromCol] = answers[toRow][toCol]
+// answers[toRow][toCol] = randoShip
 
         print(board: ocean)
 

@@ -5,61 +5,61 @@
 struct SwiftPlayground {
     static func main() {
         // Constants an variables.
-        let vocabulary = [
-            ["Bonjour", "Au revoir", "Merci", "Bravo"],
-            ["Au revoir", "Baguette", "Merci", ""],
-            ["Merci", "Au revoir", "Croissant", "Bravo"],
-            ["Bravo", "Au revoir", "Restaurant", "Bonjour"],
-            ["Oui", "Paris", "Bonjour", "Bravo"],
+        let vocabulary: [[String]] = [
+            ["Hello", "Bonjour", "Au revoir", "Merci"],
+            ["Goodbye", "Au revoir", "Baguette", "Merci"],
+            ["Thank You", "Merci", "Croissant", "Oui Oui"],
+            ["Congratulations", "Bravo", "Au revoir", "Restaurant"],
+            ["Yes", "Oui", "Paris", "Bonjour"],
         ]
 
-        let answers = [
-            (vocabulary[0][1]), (vocabulary[1][1]), (vocabulary[2][1]), (vocabulary[3][1]),
-            (vocabulary[4][1]),
-        ]
+        // Number of quesstion user got asked
+        var counter = 0
 
-        // Questions
-        let questions = [
-            ["How do you say Hello in French?"],
-            ["How do you say Goodbye in French?"],
-            ["How do you say Thank You in French?"],
-            ["How do you say Congratulations in French?"],
-            ["How do you say Yes in French?"],
-        ]
-        vocabulary.forEach { array in
-            let shuffledVocab = array.shuffled()
-        }
+        var score = 0
+
         // The indice of the question the user got wrong
         var incorrectIndices: [Int] = []
 
-        // The number of questions the user got wrong first time around
-        var incorrectCount = 0
+        while counter < vocabulary.count {
+            let englishWord = vocabulary[counter][0]
+            let correctWord = vocabulary[counter][1]
+            let allAnswers = vocabulary[counter].dropFirst().shuffled()
 
-        // Number of quesstion user got asked
-        var count = 0
+print("What is the translation for \(englishWord) in French")
+allAnswers.forEach { answer in
+print(" * \(answer)")
+}
+if let userInput = readLine(), userInput.lowercased() == correctWord.lowercased() {
+    score = score + 1 
+    print("\(correctWord) is correct !!!")
 
-        var correctCount = 0
-
-        //Loop until all vocabulary question have been asked.
-        while count < vocabulary.count {
-            questions.forEach { question in
-                print(question)
-                print("1. \(shuffledVocab[0][0])      3. \(shuffledVocab[0][2])")
-                print("2. \(shuffledVocab[0][1])      4. \(shuffledVocab[0][3])")
-                if let userInput = readLine() {
-                    count = count + 1
-                    if userInput == answers[0] {
-                        correctCount = correctCount + 1
-                    }
-                }
-            }
+} else {
+    incorrectIndices.append(counter)
+    print("Wrong, \(correctWord) was the correct answer.")
         }
-        print("You got \(correctCount)/\(count) correct answers")
-
-        // Present the possible answer.
-
-        // Check if user guessed the answer correctly.
-        // If not, makes note of the question to ask again later.
-
+        counter = counter + 1
     }
+    while incorrectIndices.count > 0 {
+        let index = incorrectIndices[0]
+        
+        let englishWord = vocabulary[index][0]
+            let correctWord = vocabulary[index][1]
+            let allAnswers = vocabulary[index].dropFirst().shuffled()
+
+print("What is the translation for \(englishWord) in French")
+allAnswers.forEach { answer in
+print(" * \(answer)")
+}
+if let userInput = readLine(), userInput.lowercased() == correctWord.lowercased() {
+    incorrectIndices.removeFirst()
+    print("\(correctWord) is correct !!!")
+
+} else {
+    print("Wrong, \(correctWord) was the correct answer.")
+        }
+    }
+            print("Your total score was \(score)/\(vocabulary.count) ")
+
+}
 }
